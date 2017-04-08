@@ -1,0 +1,16 @@
+A control and metrics telemetry setup for an Astoria Argenta SAE 2/XL
+
+Defaults for graphite hostname and serial connector go in ```/etc/astoria-metrics.cfg```:
+
+    [default]
+    serialport = /dev/ttyACM0
+    metricnamespace = astoria.argenta
+    carbon_server = graph00.dezendorf.net
+    carbon_port   = 2003
+    interval      = 0
+    sensor_error_limit = 25000
+
+
+The power-control directory has the python app that drives the webserver to allow remote web-based control. There's no attempt at authentication, so don't expose this on the internet or any other unsafe network. Seriously, folks.
+
+The teensy directory has the Teensy sketch/code for telemetry reporting and managment. It's still very much a work in progress - the only reliable things are: how many miliseconds it's been on, the number of milliseconds it's been armed, and if the SSR is enabled or not.  Later, this will have I2C libraries to drive a PT100 RTD and other sensors.  It's also setup to drive a bunch of status LED's.
